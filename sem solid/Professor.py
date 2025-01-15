@@ -1,4 +1,5 @@
-from Disciplina import Disciplina
+#from Disciplina import Disciplina
+#Tava dando problema
 
 class Professor:
     def __init__(self,matricula: int = 0 ,  nome: str = '', idade: int = 0, cargaHoraria: int = 0, salario: float = 0 ):
