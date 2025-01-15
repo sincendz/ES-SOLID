@@ -24,7 +24,7 @@ class Aluno:
             print("Erro: A idade deve ser um número inteiro.")
             return self.checarTipoIdade()
 
-    def obter_dados(self):
+    def obterDados(self):
         id = self.checarTipoId()
         nome = input("Digite o Nome do Aluno: ")
         idade = self.checarTipoIdade()
@@ -33,7 +33,7 @@ class Aluno:
             
     
     def criarAluno(self, alunos):
-        id , nome, idade ,curso = self.obter_dados()
+        id , nome, idade ,curso = self.obterDados()
         aluno = Aluno(id,nome,idade,curso)
         alunos.append(aluno)
         print("Aluno Adicionado!")
