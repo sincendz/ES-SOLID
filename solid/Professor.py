@@ -1,8 +1,7 @@
 #from Disciplina import Disciplina
-from Entidade import Entidade
 #Tava dando problema
 
-class Professor(Entidade):
+class Professor():
     def __init__(self,matricula: int = 0 ,  nome: str = '', idade: int = 0, cargaHoraria: int = 0, salario: float = 0 ):
         self.matricula = matricula
         self.nome = nome
@@ -11,9 +10,7 @@ class Professor(Entidade):
         self.salario = salario
         self.discipliasMinistradas = []
         
-    def __str__(self):
-        return f"Matricula: {self.matricula}, Nome: {self.nome}, Idade: {self.idade},
-    Carga Horária: {self.cargaHoraria}, Salário: {self.salario}"
+   
         
     def criarProfessor(self,professores):
         matricula = int(input("Digite a matricula do professor: "))
@@ -54,3 +51,10 @@ class Professor(Entidade):
                 print(f"Professor com matricula {matricula} foi deletado!")
                 return
         print("Professor não encontrado")
+        
+    def verProfessores(self,professores):
+        if len(professores) == 0:
+            print("Lista de professores vazia!")
+            return
+        for professor in professores:
+            print(f"Matricula: {professor.matricula}, Nome: {professor.nome}, Idade: {professor.idade}, Carga Horária: {professor.cargaHoraria}, Salário: {professor.salario}")

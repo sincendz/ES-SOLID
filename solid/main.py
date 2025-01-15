@@ -4,7 +4,6 @@ import platform
 from Aluno import Aluno
 from Professor import Professor
 from Disciplina import Disciplina
-from Visualidador import Visualizador
 
 alunos = []
 professores = []
@@ -13,7 +12,6 @@ disciplinas = []
 aluno = Aluno()
 professor = Professor()
 disciplina = Disciplina()
-visualizador = Visualizador()
 
 professorLucas = Professor(0,'Lucas',30,100,10_000)
 professorVivi = Professor(1,'Viviane',35,200,20_000)
@@ -77,7 +75,7 @@ def escolhasAluno(escolhaAluno):
         
     elif escolhaAluno == 3:
         limparTela()
-        visualizador.verEntidades(alunos)
+        aluno.verAlunos(alunos)
         
     elif escolhaAluno == 4:
         limparTela()
@@ -102,7 +100,7 @@ def escolhasProfessor(escolhaProfessor):
         
     elif escolhaProfessor == 3:
         limparTela()
-        visualizador.verEntidades(professores)
+        professor.verProfessores(professores)
         
     elif escolhaProfessor == 4:
         limparTela()
@@ -128,7 +126,7 @@ def escolhasDisciplina(escolhaDisciplina):
         
     elif escolhaDisciplina == 3:
         limparTela()
-        visualizador.verEntidades(disciplinas)
+        disciplina.verDisciplinas(disciplinas)
         
         
     elif escolhaDisciplina == 4:
