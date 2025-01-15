@@ -68,3 +68,25 @@ def checarTipoId(self) -> int:
 ```
 Perceba que a diferença não foi tanta, mas vamos pensar em um código com várias e várias verificações. Essa prática de cada parte do código ter apenas uma responsabilidade ajuda bastante.
 
+Por mais que tenhamos feito uma boa mudança, nossa classe CriarAluno ainda faz mais coisas do que deveria. Repare que ela também está obtendo os parâmetros. Nossa função deveria se chamar CriarAlunoEObterValores()."
+
+### Exemplos com SOLID Melhorado
+
+
+```python
+def obter_dados(self):
+        id = self.checarTipoId()
+        nome = input("Digite o Nome do Aluno: ")
+        idade = self.checarTipoIdade()
+        curso = input("Digite o curso do Aluno: ")
+        return id,nome,idade,curso
+            
+    
+    def criarAluno(self, alunos):
+        id , nome, idade ,curso = self.obter_dados()
+        aluno = Aluno(id,nome,idade,curso)
+        alunos.append(aluno)
+        print("Aluno Adicionado!")
+```
+
+Agora sim, nossa função faz exatamente o que seu nome diz: cria um aluno. Mas pera aí, ela também salva no array. Nossa função deveria ter o nome CriarAlunoESalvarNoArray? Aiai, larga de problema, rapaz...
