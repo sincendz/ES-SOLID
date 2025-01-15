@@ -9,9 +9,20 @@ class Aluno:
         self.discipliasCursadas = []
         
     def criarAluno(self, alunos):
-        id = int(input("Digite o ID do aluno: "))
+        try:
+            id = int(input("Digite o ID do aluno: "))
+        except ValueError:
+            print("Erro: O id deve ser um número inteiro.")
+            return
+            
         nome = input("Digite o Nome do Aluno: ")
-        idade = input("Digite a idade do Aluno: ")
+        try:
+            
+            idade = input("Digite a idade do Aluno: ")
+        except ValueError:
+            print("Erro: A idade deve ser um número inteiro.")
+            return
+        
         curso = input("Digite o curso do Aluno: ")
         aluno = Aluno(id,str(nome),int(idade),str(curso))
         alunos.append(aluno)
