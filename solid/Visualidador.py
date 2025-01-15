@@ -1,5 +1,5 @@
 class Visualizador:
-    def ver_entidades(self, entidades):
+    def verEntidades(self, entidades):
         if not entidades:
             print("Nenhuma entidade cadastrada.")
             return

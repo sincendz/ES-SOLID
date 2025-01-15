@@ -77,7 +77,7 @@ def escolhasAluno(escolhaAluno):
         
     elif escolhaAluno == 3:
         limparTela()
-        visualizador.ver_entidades(alunos)
+        visualizador.verEntidades(alunos)
         
     elif escolhaAluno == 4:
         limparTela()
@@ -102,7 +102,7 @@ def escolhasProfessor(escolhaProfessor):
         
     elif escolhaProfessor == 3:
         limparTela()
-        visualizador.ver_entidades(professores)
+        visualizador.verEntidades(professores)
         
     elif escolhaProfessor == 4:
         limparTela()
@@ -128,7 +128,7 @@ def escolhasDisciplina(escolhaDisciplina):
         
     elif escolhaDisciplina == 3:
         limparTela()
-        visualizador.ver_entidades(disciplinas)
+        visualizador.verEntidades(disciplinas)
         
         
     elif escolhaDisciplina == 4:

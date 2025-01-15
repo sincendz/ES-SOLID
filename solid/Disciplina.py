@@ -11,7 +11,8 @@ class Disciplina(Entidade):
         self.creditos = creditos
 
     def __str__(self):
-        return f"Código: {self.codigo}, Nome: {self.nome}, Carga Horária: {self.cargaHoraria}, Créditos: {self.creditos}, Professor Responsável: {self.professorResponsavel.nome}"
+        return f"Código: {self.codigo}, Nome: {self.nome}, Carga Horária: {self.cargaHoraria},
+    Créditos: {self.creditos}, Professor Responsável: {self.professorResponsavel.nome}"
     
     def criarDisciplina(self, disciplinas, professores):
         codigo = input("Digite o código da disciplina: ").upper()

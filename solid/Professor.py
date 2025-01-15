@@ -12,7 +12,8 @@ class Professor(Entidade):
         self.discipliasMinistradas = []
         
     def __str__(self):
-        return f"Matricula: {self.matricula}, Nome: {self.nome}, Idade: {self.idade}, Carga Horária: {self.cargaHoraria}, Salário: {self.salario}"
+        return f"Matricula: {self.matricula}, Nome: {self.nome}, Idade: {self.idade},
+    Carga Horária: {self.cargaHoraria}, Salário: {self.salario}"
         
     def criarProfessor(self,professores):
         matricula = int(input("Digite a matricula do professor: "))
