@@ -4,7 +4,7 @@
 
 
 
-## S — Responsabilidade Única
+## S — Responsabilidade Única (Single Responsibility Principle)
 
 A responsabilidade única diz respeito ao nosso trecho de código (classe, função, etc.) realizar apenas uma coisa de forma bem feita. Ou seja, como o próprio nome diz, ter uma única responsabilidade. Ao fazer essa separação, o código fica mais legível, evita bugs e, caso ocorram, será bem mais fácil de controlá-los
 
@@ -90,3 +90,7 @@ def obter_dados(self):
 ```
 
 Agora sim, nossa função faz exatamente o que seu nome diz: cria um aluno. Mas pera aí, ela também salva no array. Então a função deveria ter o nome CriarAlunoESalvarNoArray()? Aiai, larga de problema, rapaz...
+
+
+## O — Aberto-Fechado
+
