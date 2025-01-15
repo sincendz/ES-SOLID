@@ -68,7 +68,7 @@ def checarTipoId(self) -> int:
 ```
 Perceba que a diferença não foi tanta, mas vamos pensar em um código com várias e várias verificações. Essa prática de cada parte do código ter apenas uma responsabilidade ajuda bastante.
 
-Por mais que tenhamos feito uma boa mudança, nossa classe CriarAluno ainda faz mais coisas do que deveria. Repare que ela também está obtendo os parâmetros. Então nossa função deveria se chamar CriarAlunoEObterValores()?"
+Por mais que tenhamos feito uma boa mudança, nossa classe CriarAluno ainda faz mais coisas do que deveria. Repare que ela também está obtendo os parâmetros. Então nossa função deveria se chamar CriarAlunoEObterValores()?
 
 ### Exemplos com SOLID Melhorado
 
