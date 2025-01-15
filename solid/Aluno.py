@@ -1,39 +1,16 @@
 from Disciplina import Disciplina
-
+from LerAlunoTerminal import LerAlunoTerminal
 class Aluno:
     def __init__(self,id: int = 0, nome: str = '', idade: int = 0, curso: str = '' ):
         self.id = id
         self.nome = nome
         self.idade = idade
         self.curso = curso
-        self.discipliasCursadas = []
-     
-    def checarTipoId(self) -> int:
-        try:
-            id = int(input("Digite o ID do aluno: "))
-            return id  
-        except ValueError:
-            print("Erro: O ID deve ser um número inteiro.")
-            return self.checarTipoId()
-        
-    def checarTipoIdade(self) -> int:
-        try:
-            idade = int(input("Digite a idade do aluno: "))
-            return idade  
-        except ValueError:
-            print("Erro: A idade deve ser um número inteiro.")
-            return self.checarTipoIdade()
-
-    def obterDados(self):
-        id = self.checarTipoId()
-        nome = input("Digite o Nome do Aluno: ")
-        idade = self.checarTipoIdade()
-        curso = input("Digite o curso do Aluno: ")
-        return id,nome,idade,curso
+        self.lerAlunoTerminal = LerAlunoTerminal()
             
     
     def criarAluno(self, alunos):
-        id , nome, idade ,curso = self.obterDados()
+        id , nome, idade ,curso = self.lerAlunoTerminal.obterDados()
         aluno = Aluno(id,nome,idade,curso)
         alunos.append(aluno)
         print("Aluno Adicionado!")
