@@ -8,12 +8,7 @@ class Professor():
         self.idade = idade
         self.cargaHoraria = cargaHoraria
         self.salario = salario
-        self.discipliasMinistradas = []
-        
-    def __str__(self):
-        return f"Matricula: {self.matricula}, Nome: {self.nome}, Idade: {self.idade},
-    Carga Horária: {self.cargaHoraria}, Salário: {self.salario}"
-        
+    
     def criarProfessor(self,professores):
         matricula = int(input("Digite a matricula do professor: "))
         nome = input("Digite o Nome do professor: ")
@@ -59,5 +54,5 @@ class Professor():
             print("Sem professores cadastradas!")
             return
         for professor in professores:
-            print(f"Código: {professor.codigo}, Nome: {professor.nome}, Carga Horária: {professor.cargaHoraria}, "
-                  f"Créditos: {professor.creditos}, Professor Responsável: {professor.professorResponsavel.nome}") 
+            print(f"Matricula: {professor.matricula}, Nome: {professor.nome}, Carga Horária: {professor.cargaHoraria}, "
+                  f"Idade: {professor.idade}, Salario {professor.salario}") 
