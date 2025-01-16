@@ -1,7 +1,6 @@
 from Disciplina import Disciplina
 from LerAlunoTerminal import LerAlunoTerminal
-from Entidade import Entidade
-class Aluno(Entidade):
+class Aluno():
     def __init__(self,id: int = 0, nome: str = '', idade: int = 0, curso: str = '' ):
         self.id = id
         self.nome = nome
@@ -9,8 +8,6 @@ class Aluno(Entidade):
         self.curso = curso
         self.lerAlunoTerminal = LerAlunoTerminal()
             
-    def __str__(self):
-        return f"Id: {self.id}, Nome: {self.nome}, Idade: {self.idade}, Curso: {self.curso}"
     
     def criarAluno(self, alunos):
         id , nome, idade ,curso = self.lerAlunoTerminal.obterDados()

@@ -1,7 +1,6 @@
 from Professor import Professor
-from Entidade import Entidade
 
-class Disciplina(Entidade):
+class Disciplina():
     def __init__(self, codigo = '', nome: str = '', 
                  cargaHoraria: int = 0, professorResponsavel: Professor = None, creditos: int = 0):
         self.codigo = codigo
@@ -10,10 +9,7 @@ class Disciplina(Entidade):
         self.professorResponsavel = professorResponsavel
         self.creditos = creditos
 
-    def __str__(self):
-        return f"Código: {self.codigo}, Nome: {self.nome}, Carga Horária: {self.cargaHoraria},
-    Créditos: {self.creditos}, Professor Responsável: {self.professorResponsavel.nome}"
-    
+       
     def criarDisciplina(self, disciplinas, professores):
         codigo = input("Digite o código da disciplina: ").upper()
         nome = input("Digite o nome da disciplina: ")
