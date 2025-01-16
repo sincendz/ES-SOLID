@@ -80,35 +80,38 @@ O princípio aberto/fechado diz o seguinte: 'As classes devem ser abertas para e
 
 
 ```python
-#Classe Aluno
-from Aluno import Aluno
-from LerAlunoTerminal import LerAlunoTerminal
-
-class AlunoServicos:
-    def __init__(self):
-        #Logica
-
-    def criarAluno(self, alunos):
-        #Logica
-        
-    def editarAluno(self, id: int, alunos):
-        #Logica
-        
-    def excluirAluno(self, id: int, alunos):
-        #Logica
-    
-    def verAlunos(self, alunos):
-        #Logica
-            
-class AlunosIdadeMaiorQue20:
-    def __init__(self, alunos):
-        #Logica
-        
-    def procurar(self):
-        #Logica
+class ChecarPagamento:
+    def processar(self,tipo):
+        if tipo == 'credito':
+            pass
+        elif tipo == 'debito':
+            pass  
 ```
+Para cada novo tipo de pagamento temos que alterar a função 
 
-Perceba que foi necessário adicionar uma função na nossa classe, mas como ela está fechada para modificação e aberta para extensão, fizemos uma nova classe que faz o que o programador deseja. Isso é bem importante para que não ocorram erros ou para que o que já está funcionando não pare de funcionar.
+```python
+class Pagamento(ABC):
+    @abstractmethod
+    def processar(self):
+        pass
+    
+    
+class Credito(Pagamento):
+    def processar(self):
+        pass
+
+class Debito(Pagamento):
+    def processar(self):
+        pass
+    
+class ChecarPagamento:
+    def __init__(self, tipoPagamento: Pagamento):
+        self.tp = tipoPagamento
+    def processarPagamento(self):
+        self.tp.processar()
+  
+```
+Dessa forma, para cada tipo de pagamento diferente, posso apenas adicionar uma nova interface/classe, e não será necessário mexer no checarPagamento
 
 
 
