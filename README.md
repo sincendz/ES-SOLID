@@ -14,85 +14,57 @@ A responsabilidade única diz respeito ao nosso trecho de código (classe, funç
 ### Exemplos sem SOLID
 
 ```python
-def criarAluno(self, alunos):
-        try:
-            id = int(input("Digite o ID do aluno: "))
-        except ValueError:
-            print("Erro: O id deve ser um número inteiro.")
-            return
+class Aluno():
+    def __init__(self,id: int = 0, nome: str = '', idade: int = 0, curso: str = '' ):
+        self.id = id
+        self.nome = nome
+        self.idade = idade
+        self.curso = curso
+        self.lerAlunoTerminal = LerAlunoTerminal()
             
-        nome = input("Digite o Nome do Aluno: ")
-        try:
-            
-            idade = input("Digite a idade do Aluno: ")
-        except ValueError:
-            print("Erro: A idade deve ser um número inteiro.")
-            return
+    def criarAluno(self, alunos):
+        #Logica
         
-        curso = input("Digite o curso do Aluno: ")
-        aluno = Aluno(id,str(nome),int(idade),str(curso))
-        alunos.append(aluno)
-        print("Aluno Adicionado!")
+    def editarAluno(self,id: int, alunos):
+        #Logica
+    def excluirAluno(self,id: int, alunos):
+        #Logica
+    
+    def verAlunos(self,alunos):
+        #Logica
 ```
-Por mais que o código seja simples, a presença desse tratamento de exceção pode prejudicar a legibilidade do código e dificultar sua manutenção
+Nossa classe Aluno tem métodos de serviço do aluno que não são de sua responsabilidade. Então, a classe Aluno agora fica responsável apenas por instanciar o aluno, e a classe AlunoService faz as funções básicas do CRUD. Agora, cada função tem sua responsabilidade única.
 
 
 ### Exemplos com SOLID
 
 ```python
-def checarTipoId(self) -> int:
-        try:
-            id = int(input("Digite o ID do aluno: "))
-            return id  
-        except ValueError:
-            print("Erro: O ID deve ser um número inteiro.")
-            return self.checarTipoId()
-        
-    def checarTipoIdade(self) -> int:
-        try:
-            idade = int(input("Digite a idade do aluno: "))
-            return idade  
-        except ValueError:
-            print("Erro: A idade deve ser um número inteiro.")
-            return self.checarTipoIdade()
-
-        
-    def criarAluno(self, alunos):
-        id = self.checarTipoId()
-        nome = input("Digite o Nome do Aluno: ")
-        idade = self.checarTipoIdade()
-        curso = input("Digite o curso do Aluno: ")
-        aluno = Aluno(id,str(nome),int(idade),str(curso))
-        alunos.append(aluno)
-        print("Aluno Adicionado!")
+class Aluno():
+    def __init__(self,id: int = 0, nome: str = '', idade: int = 0, curso: str = '' ):
+        self.id = id
+        self.nome = nome
+        self.idade = idade
+        self.curso = curso
 ```
-Perceba que a diferença não foi tanta, mas vamos pensar em um código com várias e várias verificações. Essa prática de cada parte do código ter apenas uma responsabilidade ajuda bastante.
-
-Por mais que tenhamos feito uma boa mudança, nossa classe CriarAluno ainda faz mais coisas do que deveria. Repare que ela também está obtendo os parâmetros. Então nossa função deveria se chamar CriarAlunoEObterValores()?
-
-### Exemplos com SOLID Melhorado
-
-
 ```python
-def obter_dados(self):
-        id = self.checarTipoId()
-        nome = input("Digite o Nome do Aluno: ")
-        idade = self.checarTipoIdade()
-        curso = input("Digite o curso do Aluno: ")
-        return id,nome,idade,curso
-            
-    
+
+class AlunoServicos:
+    def __init__(self):
+        self.lerAlunoTerminal = LerAlunoTerminal()
+
     def criarAluno(self, alunos):
-        id , nome, idade ,curso = self.obter_dados()
-        aluno = Aluno(id,nome,idade,curso)
-        alunos.append(aluno)
-        print("Aluno Adicionado!")
+        #Logica
+
+    def editarAluno(self, id: int, alunos):
+        #Logica
+
+    def excluirAluno(self, id: int, alunos):
+        #Logica
+    
+    def verAlunos(self, alunos):
+        #Logica
+
 ```
-
-Agora sim, nossa função faz exatamente o que seu nome diz: cria um aluno. Mas pera aí, ela também salva no array. Então a função deveria ter o nome CriarAlunoESalvarNoArray()? Aiai, larga de problema, rapaz...
-
-
-
 
 ## O — Aberto-Fechado ( Open/Closed Principle )
 
@@ -107,113 +79,84 @@ O princípio aberto/fechado diz o seguinte: 'As classes devem ser abertas para e
 
 
 
-
-### Exemplos sem SOLID
-
 ```python
 #Classe Aluno
-def verAlunos(self,alunos):
-        if(len(alunos) == 0):
-            print("Nao a alunos cadastrados")
-            return
-        for aluno in alunos:
-            print(f"Id: {aluno.id}, Nome: {aluno.nome}, Idade : {aluno.idade}, Curso: {aluno.curso}")
-```
+from Aluno import Aluno
+from LerAlunoTerminal import LerAlunoTerminal
 
+class AlunoServicos:
+    def __init__(self):
+        #Logica
 
-```python
-#Classe Disciplina
-def verDisciplinas(self,disciplinas):
-        if len(disciplinas) == 0:
-            print("Sem disciplinas cadastradas!")
-            return
-        for disciplina in disciplinas:
-            print(f"Código: {disciplina.codigo}, Nome: {disciplina.nome}, Carga Horária: {disciplina.cargaHoraria}, "
-                  f"Créditos: {disciplina.creditos}, Professor Responsável: {disciplina.professorResponsavel.nome}")
-```
-
-
-```python
-#Classe Professor
-def verProfessores(self,professores):
-        if len(professores) == 0:
-            print("Lista de professores vazia!")
-            return
-        for professor in professores:
-            print(f"Matricula: {professor.matricula}, Nome: {professor.nome}, Idade: {professor.idade}, Carga Horária: {professor.cargaHoraria}, Salário: {professor.salario}")
-```
-Podemos ver que todas as funções implementam a mesma coisa. Então, caso eu crie uma nova classe Diretor, precisarei criar o verDiretor. Será que existe alguma forma de mostrar todas essas entidades usando uma função genérica?
-
-
-### Exemplos com SOLID
-
-
-```python
-from abc import ABC, abstractmethod
-
-class Entidade(ABC):
-    @abstractmethod
-    #Qualquer classe que herda de entidade implementa o __str__
-    #__str__ serve para printar printar o objeto
-    def __str__(self):
-        pass
-```
-Aberto para extensão: Agora conseguimos adicionar novas funcionalidades ao sistema sem alterar o código.
-
-Fechado para modificação: O código existente já foi testado e está funcionando, então não devemos modificá-lo para adicionar novas funcionalidades
-```python
-class Aluno(Entidade):
-    def __init__(self,id: int = 0, nome: str = '', idade: int = 0, curso: str = '' ):
-        self.id = id
-        self.nome = nome
-        self.idade = idade
-        self.curso = curso
-        self.lerAlunoTerminal = LerAlunoTerminal()
-            
-    def __str__(self):
-        return f"Id: {self.id}, Nome: {self.nome}, Idade: {self.idade}, Curso: {self.curso}"
-```
-
-```python
-def __init__(self,matricula: int = 0 ,  nome: str = '', idade: int = 0, cargaHoraria: int = 0, salario: float = 0 ):
-        self.matricula = matricula
-        self.nome = nome
-        self.idade = idade
-        self.cargaHoraria = cargaHoraria
-        self.salario = salario
-        self.discipliasMinistradas = []
+    def criarAluno(self, alunos):
+        #Logica
         
-    def __str__(self):
-        return f"Matricula: {self.matricula}, Nome: {self.nome}, Idade: {self.idade},
-    Carga Horária: {self.cargaHoraria}, Salário: {self.salario}"
+    def editarAluno(self, id: int, alunos):
+        #Logica
+        
+    def excluirAluno(self, id: int, alunos):
+        #Logica
+    
+    def verAlunos(self, alunos):
+        #Logica
+            
+class AlunosIdadeMaiorQue20:
+    def __init__(self, alunos):
+        #Logica
+        
+    def procurar(self):
+        #Logica
 ```
 
+Perceba que foi necessário adicionar uma função na nossa classe, mas como ela está fechada para modificação e aberta para extensão, fizemos uma nova classe que faz o que o programador deseja. Isso é bem importante para que não ocorram erros ou para que o que já está funcionando não pare de funcionar.
+
+
+
+## Substituição de Liskov
+
+Princípio da substituição de Liskov — Uma classe derivada deve ser substituível por sua classe base. Ou seja, no nosso código, a classe AlunoServicos deriva da classe CRUD e implementa todos os métodos da mesma. Caso a classe filha seja passada no lugar da classe pai, o código funcionará normalmente, como esperado.
+
+Classe Base
 ```python
-class Disciplina(Entidade):
-    def __init__(self, codigo = '', nome: str = '', 
-                 cargaHoraria: int = 0, professorResponsavel: Professor = None, creditos: int = 0):
-        self.codigo = codigo
-        self.nome = nome
-        self.cargaHoraria = cargaHoraria
-        self.professorResponsavel = professorResponsavel
-        self.creditos = creditos
-
-    def __str__(self):
-        return f"Código: {self.codigo}, Nome: {self.nome}, Carga Horária: {self.cargaHoraria},
-    Créditos: {self.creditos}, Professor Responsável: {self.professorResponsavel.nome}"
+class Crud(ABC):
+    def __init__(self):
+        self.data = []
+    @abstractmethod
+    def criar(self):
+        pass
+    
+    @abstractmethod
+    def editar(self,id):
+        pass
+    
+    @abstractmethod
+    def ver(self):
+        pass
+    
+    @abstractmethod
+    def excluir(self,id):
+        pass
+    
 ```
-Com isso, agora podemos criar uma única função genérica que qualquer tipo de entidade que herde o método exibir poderá usar.
 
 
+Classe derivada
 ```python
-class Visualizador:
-    def verEntidades(self, entidades):
-        if not entidades:
-            print("Nenhuma entidade cadastrada.")
-            return
 
-        for entidade in entidades:
-            print(entidade)
-```
+class AlunoServicos(Crud):
+    def __init__(self):
+        super().__init__()
+        #Logica
 
-Agora, qualquer classe pode chamar visualizador.verEntidades(param) e os valores irão aparecer.
+    
+    def criar(self):
+         #Logica
+    
+    def ver(self):
+         #Logica
+    
+    def editar(self, id):
+         #Logica
+    
+    def excluir(self,id: int):
+         #Logica
