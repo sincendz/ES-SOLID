@@ -79,113 +79,34 @@ O princípio aberto/fechado diz o seguinte: 'As classes devem ser abertas para e
 
 
 
-
-### Exemplos sem SOLID
-
 ```python
 #Classe Aluno
-def verAlunos(self,alunos):
-        if(len(alunos) == 0):
-            print("Nao a alunos cadastrados")
-            return
-        for aluno in alunos:
-            print(f"Id: {aluno.id}, Nome: {aluno.nome}, Idade : {aluno.idade}, Curso: {aluno.curso}")
-```
+rom Aluno import Aluno
+from LerAlunoTerminal import LerAlunoTerminal
 
+class AlunoServicos:
+    def __init__(self):
+        #Logica
 
-```python
-#Classe Disciplina
-def verDisciplinas(self,disciplinas):
-        if len(disciplinas) == 0:
-            print("Sem disciplinas cadastradas!")
-            return
-        for disciplina in disciplinas:
-            print(f"Código: {disciplina.codigo}, Nome: {disciplina.nome}, Carga Horária: {disciplina.cargaHoraria}, "
-                  f"Créditos: {disciplina.creditos}, Professor Responsável: {disciplina.professorResponsavel.nome}")
-```
-
-
-```python
-#Classe Professor
-def verProfessores(self,professores):
-        if len(professores) == 0:
-            print("Lista de professores vazia!")
-            return
-        for professor in professores:
-            print(f"Matricula: {professor.matricula}, Nome: {professor.nome}, Idade: {professor.idade}, Carga Horária: {professor.cargaHoraria}, Salário: {professor.salario}")
-```
-Podemos ver que todas as funções implementam a mesma coisa. Então, caso eu crie uma nova classe Diretor, precisarei criar o verDiretor. Será que existe alguma forma de mostrar todas essas entidades usando uma função genérica?
-
-
-### Exemplos com SOLID
-
-
-```python
-from abc import ABC, abstractmethod
-
-class Entidade(ABC):
-    @abstractmethod
-    #Qualquer classe que herda de entidade implementa o __str__
-    #__str__ serve para printar printar o objeto
-    def __str__(self):
-        pass
-```
-Aberto para extensão: Agora conseguimos adicionar novas funcionalidades ao sistema sem alterar o código.
-
-Fechado para modificação: O código existente já foi testado e está funcionando, então não devemos modificá-lo para adicionar novas funcionalidades
-```python
-class Aluno(Entidade):
-    def __init__(self,id: int = 0, nome: str = '', idade: int = 0, curso: str = '' ):
-        self.id = id
-        self.nome = nome
-        self.idade = idade
-        self.curso = curso
-        self.lerAlunoTerminal = LerAlunoTerminal()
-            
-    def __str__(self):
-        return f"Id: {self.id}, Nome: {self.nome}, Idade: {self.idade}, Curso: {self.curso}"
-```
-
-```python
-def __init__(self,matricula: int = 0 ,  nome: str = '', idade: int = 0, cargaHoraria: int = 0, salario: float = 0 ):
-        self.matricula = matricula
-        self.nome = nome
-        self.idade = idade
-        self.cargaHoraria = cargaHoraria
-        self.salario = salario
-        self.discipliasMinistradas = []
+    def criarAluno(self, alunos):
+        #Logica
         
-    def __str__(self):
-        return f"Matricula: {self.matricula}, Nome: {self.nome}, Idade: {self.idade},
-    Carga Horária: {self.cargaHoraria}, Salário: {self.salario}"
+    def editarAluno(self, id: int, alunos):
+        #Logica
+        
+    def excluirAluno(self, id: int, alunos):
+        #Logica
+    
+    def verAlunos(self, alunos):
+        #Logica
+            
+class AlunosIdadeMaiorQue20:
+    def __init__(self, alunos):
+        #Logica
+        
+    def procurar(self):
+        #Logica
 ```
 
-```python
-class Disciplina(Entidade):
-    def __init__(self, codigo = '', nome: str = '', 
-                 cargaHoraria: int = 0, professorResponsavel: Professor = None, creditos: int = 0):
-        self.codigo = codigo
-        self.nome = nome
-        self.cargaHoraria = cargaHoraria
-        self.professorResponsavel = professorResponsavel
-        self.creditos = creditos
+Perceba que foi necessário adicionar uma função na nossa classe, mas como ela está fechada para modificação e aberta para extensão, fizemos uma nova classe que faz o que o programador deseja. Isso é bem importante para que não ocorram erros ou para que o que já está funcionando não pare de funcionar.
 
-    def __str__(self):
-        return f"Código: {self.codigo}, Nome: {self.nome}, Carga Horária: {self.cargaHoraria},
-    Créditos: {self.creditos}, Professor Responsável: {self.professorResponsavel.nome}"
-```
-Com isso, agora podemos criar uma única função genérica que qualquer tipo de entidade que herde o método exibir poderá usar.
-
-
-```python
-class Visualizador:
-    def verEntidades(self, entidades):
-        if not entidades:
-            print("Nenhuma entidade cadastrada.")
-            return
-
-        for entidade in entidades:
-            print(entidade)
-```
-
-Agora, qualquer classe pode chamar visualizador.verEntidades(param) e os valores irão aparecer.
