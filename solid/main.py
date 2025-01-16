@@ -1,7 +1,7 @@
 import os
 import platform
 
-from Aluno import Aluno
+from AlunoServicos import AlunoServicos
 from Professor import Professor
 from Disciplina import Disciplina
 
@@ -10,7 +10,7 @@ alunos = []
 professores = []
 disciplinas = []
 
-aluno = Aluno()
+aluno = AlunoServicos()
 professor = Professor()
 disciplina = Disciplina()
 

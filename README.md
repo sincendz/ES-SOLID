@@ -14,85 +14,57 @@ A responsabilidade única diz respeito ao nosso trecho de código (classe, funç
 ### Exemplos sem SOLID
 
 ```python
-def criarAluno(self, alunos):
-        try:
-            id = int(input("Digite o ID do aluno: "))
-        except ValueError:
-            print("Erro: O id deve ser um número inteiro.")
-            return
+class Aluno():
+    def __init__(self,id: int = 0, nome: str = '', idade: int = 0, curso: str = '' ):
+        self.id = id
+        self.nome = nome
+        self.idade = idade
+        self.curso = curso
+        self.lerAlunoTerminal = LerAlunoTerminal()
             
-        nome = input("Digite o Nome do Aluno: ")
-        try:
-            
-            idade = input("Digite a idade do Aluno: ")
-        except ValueError:
-            print("Erro: A idade deve ser um número inteiro.")
-            return
+    def criarAluno(self, alunos):
+        #Logica
         
-        curso = input("Digite o curso do Aluno: ")
-        aluno = Aluno(id,str(nome),int(idade),str(curso))
-        alunos.append(aluno)
-        print("Aluno Adicionado!")
+    def editarAluno(self,id: int, alunos):
+        #Logica
+    def excluirAluno(self,id: int, alunos):
+        #Logica
+    
+    def verAlunos(self,alunos):
+        #Logica
 ```
-Por mais que o código seja simples, a presença desse tratamento de exceção pode prejudicar a legibilidade do código e dificultar sua manutenção
+Nossa classe Aluno tem métodos de serviço do aluno que não são de sua responsabilidade. Então, a classe Aluno agora fica responsável apenas por instanciar o aluno, e a classe AlunoService faz as funções básicas do CRUD. Agora, cada função tem sua responsabilidade única.
 
 
 ### Exemplos com SOLID
 
 ```python
-def checarTipoId(self) -> int:
-        try:
-            id = int(input("Digite o ID do aluno: "))
-            return id  
-        except ValueError:
-            print("Erro: O ID deve ser um número inteiro.")
-            return self.checarTipoId()
-        
-    def checarTipoIdade(self) -> int:
-        try:
-            idade = int(input("Digite a idade do aluno: "))
-            return idade  
-        except ValueError:
-            print("Erro: A idade deve ser um número inteiro.")
-            return self.checarTipoIdade()
-
-        
-    def criarAluno(self, alunos):
-        id = self.checarTipoId()
-        nome = input("Digite o Nome do Aluno: ")
-        idade = self.checarTipoIdade()
-        curso = input("Digite o curso do Aluno: ")
-        aluno = Aluno(id,str(nome),int(idade),str(curso))
-        alunos.append(aluno)
-        print("Aluno Adicionado!")
+class Aluno():
+    def __init__(self,id: int = 0, nome: str = '', idade: int = 0, curso: str = '' ):
+        self.id = id
+        self.nome = nome
+        self.idade = idade
+        self.curso = curso
 ```
-Perceba que a diferença não foi tanta, mas vamos pensar em um código com várias e várias verificações. Essa prática de cada parte do código ter apenas uma responsabilidade ajuda bastante.
-
-Por mais que tenhamos feito uma boa mudança, nossa classe CriarAluno ainda faz mais coisas do que deveria. Repare que ela também está obtendo os parâmetros. Então nossa função deveria se chamar CriarAlunoEObterValores()?
-
-### Exemplos com SOLID Melhorado
-
-
 ```python
-def obter_dados(self):
-        id = self.checarTipoId()
-        nome = input("Digite o Nome do Aluno: ")
-        idade = self.checarTipoIdade()
-        curso = input("Digite o curso do Aluno: ")
-        return id,nome,idade,curso
-            
-    
+
+class AlunoServicos:
+    def __init__(self):
+        self.lerAlunoTerminal = LerAlunoTerminal()
+
     def criarAluno(self, alunos):
-        id , nome, idade ,curso = self.obter_dados()
-        aluno = Aluno(id,nome,idade,curso)
-        alunos.append(aluno)
-        print("Aluno Adicionado!")
+        #Logica
+
+    def editarAluno(self, id: int, alunos):
+        #Logica
+
+    def excluirAluno(self, id: int, alunos):
+        #Logica
+    
+    def verAlunos(self, alunos):
+        #Logica
+
 ```
-
-Agora sim, nossa função faz exatamente o que seu nome diz: cria um aluno. Mas pera aí, ela também salva no array. Então a função deveria ter o nome CriarAlunoESalvarNoArray()? Aiai, larga de problema, rapaz...
-
-
-
 
 ## O — Aberto-Fechado ( Open/Closed Principle )
 
