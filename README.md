@@ -81,7 +81,7 @@ O princípio aberto/fechado diz o seguinte: 'As classes devem ser abertas para e
 
 ```python
 #Classe Aluno
-rom Aluno import Aluno
+from Aluno import Aluno
 from LerAlunoTerminal import LerAlunoTerminal
 
 class AlunoServicos:
@@ -110,3 +110,53 @@ class AlunosIdadeMaiorQue20:
 
 Perceba que foi necessário adicionar uma função na nossa classe, mas como ela está fechada para modificação e aberta para extensão, fizemos uma nova classe que faz o que o programador deseja. Isso é bem importante para que não ocorram erros ou para que o que já está funcionando não pare de funcionar.
 
+
+
+## Substituição de Liskov
+
+Princípio da substituição de Liskov — Uma classe derivada deve ser substituível por sua classe base. Ou seja, no nosso código, a classe AlunoServicos deriva da classe CRUD e implementa todos os métodos da mesma. Caso a classe filha seja passada no lugar da classe pai, o código funcionará normalmente, como esperado.
+
+Classe Base
+```python
+class Crud(ABC):
+    def __init__(self):
+        self.data = []
+    @abstractmethod
+    def criar(self):
+        pass
+    
+    @abstractmethod
+    def editar(self,id):
+        pass
+    
+    @abstractmethod
+    def ver(self):
+        pass
+    
+    @abstractmethod
+    def excluir(self,id):
+        pass
+    
+```
+
+
+Classe derivada
+```python
+
+class AlunoServicos(Crud):
+    def __init__(self):
+        super().__init__()
+        #Logica
+
+    
+    def criar(self):
+         #Logica
+    
+    def ver(self):
+         #Logica
+    
+    def editar(self, id):
+         #Logica
+    
+    def excluir(self,id: int):
+         #Logica

@@ -11,7 +11,7 @@ alunos = []
 professores = []
 disciplinas = []
 
-aluno = AlunoServicos()
+alunoServicos = AlunoServicos()
 professor = Professor()
 disciplina = Disciplina()
 
@@ -77,24 +77,25 @@ def menuDisciplina():
 def escolhasAluno(escolhaAluno):
     if escolhaAluno == 1:
         limparTela()
-        aluno.criarAluno(alunos)
+        alunoServicos.criar()
         
     elif escolhaAluno == 2:
         limparTela()
         id = int(input("Digite o ID do aluno: "))
-        aluno.editarAluno(id, alunos)
+        alunoServicos.editar(id)
         
     elif escolhaAluno == 3:
         limparTela()
-        aluno.verAlunos(alunos)
+        alunoServicos.ver()
         
     elif escolhaAluno == 4:
         limparTela()
         id = int(input("Digite o ID do aluno: "))
-        aluno.excluirAluno(id, alunos)
+        alunoServicos.excluir(id)
         
     elif escolhaAluno == 6:
-        aluIdade = alunosIdadeMaiorQue20(alunos)
+        #alunos = alunoServicos.atualizacaoData()
+        aluIdade = alunosIdadeMaiorQue20(alunoServicos)
         aluIdade.procurar()
     
     elif escolhaAluno == 5:
