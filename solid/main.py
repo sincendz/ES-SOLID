@@ -2,41 +2,21 @@ import os
 import platform
 
 from AlunoServicos import AlunoServicos , alunosIdadeMaiorQue20
+from ProfessorServicos import ProfessorServicos
 from Professor import Professor
 from Disciplina import Disciplina
 from Aluno import Aluno
 
 
-alunos = []
+
 professores = []
 disciplinas = []
 
 alunoServicos = AlunoServicos()
+professorServisos = ProfessorServicos()
 professor = Professor()
 disciplina = Disciplina()
 
-alunoMario = Aluno(10,"Mario",20,"CC")
-alunoG = Aluno(11,"Gustavo",21,"CC")
-alunoJ = Aluno(12,"JOJE",22,"CC")
-alunoGI = Aluno(12,"GUIGUI",19,"CC")
-
-professorLucas = Professor(0,'Lucas',30,100,10_000)
-professorVivi = Professor(1,'Viviane',35,200,20_000)
-
-ES = Disciplina('QXD001',"ES",100,professorLucas,6)
-PAA = Disciplina('QXD002','PAA',100,professorVivi,6)
-
-
-alunos.append(alunoMario)
-alunos.append(alunoG)
-alunos.append(alunoJ)
-alunos.append(alunoGI)
-
-professores.append(professorLucas)
-professores.append(professorVivi)
-
-disciplinas.append(ES)
-disciplinas.append(PAA)
 
 
 def limparTela():
@@ -107,21 +87,21 @@ def escolhasAluno(escolhaAluno):
 def escolhasProfessor(escolhaProfessor):
     if escolhaProfessor == 1:
         limparTela()
-        professor.criarProfessor(professores)
+        professorServisos.criar()
         
     elif escolhaProfessor == 2:
         limparTela()
-        id = int(input("Digite o ID do professor: "))
-        professor.editarProfessor(id, professores)
+        id = int(input("Digite a matricula do professor: "))
+        professorServisos.editar(id)
         
     elif escolhaProfessor == 3:
         limparTela()
-        professor.verProfessores(professores)
+        professorServisos.ver()
         
     elif escolhaProfessor == 4:
         limparTela()
         matricula = int(input("Digite a matricula do professor: "))
-        professor.excluirProfessor(matricula, professores)
+        professorServisos.excluir(matricula)
     
     elif escolhaProfessor == 5:
         return False

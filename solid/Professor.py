@@ -8,16 +8,7 @@ class Professor():
         self.idade = idade
         self.cargaHoraria = cargaHoraria
         self.salario = salario
-    
-    def criarProfessor(self,professores):
-        matricula = int(input("Digite a matricula do professor: "))
-        nome = input("Digite o Nome do professor: ")
-        idade = int(input("Digite a idade do professor: "))
-        cargaHoraria = int(input("Digite a carga horaria do professor: "))
-        salario = float(input("Digite o salario do professor: "))
-        professor = Professor(matricula,nome,idade,cargaHoraria,salario)
-        professores.append(professor)
-        print("Professor Adicionado!")
+
         
     def editarProfessor(self,matricula,professores):
         for professor in professores:
@@ -49,10 +40,4 @@ class Professor():
                 return
         print("Professor não encontrado")
         
-    def verProfessores(self,professores):
-        if len(professores) == 0:
-            print("Sem professores cadastradas!")
-            return
-        for professor in professores:
-            print(f"Matricula: {professor.matricula}, Nome: {professor.nome}, Carga Horária: {professor.cargaHoraria}, "
-                  f"Idade: {professor.idade}, Salario {professor.salario}") 
+
