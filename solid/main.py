@@ -1,9 +1,10 @@
 import os
 import platform
 
-from AlunoServicos import AlunoServicos
+from AlunoServicos import AlunoServicos , alunosIdadeMaiorQue20
 from Professor import Professor
 from Disciplina import Disciplina
+from Aluno import Aluno
 
 
 alunos = []
@@ -14,6 +15,10 @@ aluno = AlunoServicos()
 professor = Professor()
 disciplina = Disciplina()
 
+alunoMario = Aluno(10,"Mario",20,"CC")
+alunoG = Aluno(11,"Gustavo",21,"CC")
+alunoJ = Aluno(12,"JOJE",22,"CC")
+alunoGI = Aluno(12,"GUIGUI",19,"CC")
 
 professorLucas = Professor(0,'Lucas',30,100,10_000)
 professorVivi = Professor(1,'Viviane',35,200,20_000)
@@ -22,7 +27,10 @@ ES = Disciplina('QXD001',"ES",100,professorLucas,6)
 PAA = Disciplina('QXD002','PAA',100,professorVivi,6)
 
 
-
+alunos.append(alunoMario)
+alunos.append(alunoG)
+alunos.append(alunoJ)
+alunos.append(alunoGI)
 
 professores.append(professorLucas)
 professores.append(professorVivi)
@@ -50,6 +58,7 @@ def menuAluno():
     print("3 - Ver Alunos")
     print("4 - Excluir Aluno")
     print("5 - Voltar ao menu Principal")
+    print("6 - Alunos com idade maior que 20")
     
 def menuProfessor():
     print("1 - Adicionar Professor")
@@ -83,6 +92,10 @@ def escolhasAluno(escolhaAluno):
         limparTela()
         id = int(input("Digite o ID do aluno: "))
         aluno.excluirAluno(id, alunos)
+        
+    elif escolhaAluno == 6:
+        aluIdade = alunosIdadeMaiorQue20(alunos)
+        aluIdade.procurar()
     
     elif escolhaAluno == 5:
         return False

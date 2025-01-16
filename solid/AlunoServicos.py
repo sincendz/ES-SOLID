@@ -42,3 +42,11 @@ class AlunoServicos:
             return
         for aluno in alunos:
             print(f"Id: {aluno.id}, Nome: {aluno.nome}, Idade : {aluno.idade}, Curso: {aluno.curso}")
+            
+class alunosIdadeMaiorQue20():
+    def __init__(self, alunos):
+        self.alunos = alunos
+    def procurar(self):
+        for aluno in self.alunos:
+            if aluno.idade > 20:
+                print(aluno.nome)
