@@ -1,8 +1,7 @@
-#from Disciplina import Disciplina
-from Entidade import Entidade
+#from professor import Disciplina
 #Tava dando problema
 
-class Professor(Entidade):
+class Professor():
     def __init__(self,matricula: int = 0 ,  nome: str = '', idade: int = 0, cargaHoraria: int = 0, salario: float = 0 ):
         self.matricula = matricula
         self.nome = nome
@@ -54,3 +53,11 @@ class Professor(Entidade):
                 print(f"Professor com matricula {matricula} foi deletado!")
                 return
         print("Professor não encontrado")
+        
+    def verProfessores(self,professores):
+        if len(professores) == 0:
+            print("Sem professores cadastradas!")
+            return
+        for professor in professores:
+            print(f"Código: {professor.codigo}, Nome: {professor.nome}, Carga Horária: {professor.cargaHoraria}, "
+                  f"Créditos: {professor.creditos}, Professor Responsável: {professor.professorResponsavel.nome}") 
