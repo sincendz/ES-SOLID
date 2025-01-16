@@ -160,3 +160,101 @@ class AlunoServicos(Crud):
     
     def excluir(self,id: int):
          #Logica
+```
+
+## ISP — Interface Segregation Principle:
+
+O Princípio da Segregação da Interface diz que uma classe não deve ser forçada a implementar interfaces e métodos que não irá utilizar.
+
+```python
+
+class Pessoa(ABC):
+    @abstractmethod
+    def estudar(self):
+        pass
+    
+    @abstractmethod
+    def ensinar(self):
+        pass
+
+    @abstractmethod
+    def avaliar(self):
+        pass 
+```
+Pensando na classe Pessoa, quando o Aluno for herdar, ele vai implementar métodos que não fazem sentido para ele, como o método avaliar. Já o Professor pode implementar todos os métodos.
+
+```python
+
+class Aluno(Pessoa):
+    def __init__(self,id: int = 0, nome: str = '', idade: int = 0, curso: str = '' ):
+        #Logica
+    def estudar(self):
+        print("Estudando!")
+        
+    def ensinar(self):
+        raise NotImplementedError("Aluno não pode ensinar")
+
+    def avaliar(self):
+        raise NotImplementedError("Aluno não pode avaliar")
+```
+
+
+```python
+
+class Professor(Pessoa):
+    def __init__(self,matricula: int = 0 ,  nome: str = '', idade: int = 0, cargaHoraria: int = 0, salario: float = 0 ):
+        #Logica
+        
+    def estudar(self):
+        print("Estudando conteúdo novo!")
+
+    def ensinar(self):
+        print("Ensinando alunos!")
+
+    def avaliar(self):
+        print("Avaliando aluno!")
+```
+
+## Resolvendo 
+
+Para resolvermos isso, basta criar uma classe Estudante com o método estudar, e a classe Aluno herdar esse método. Também criamos a classe Educador com os métodos ensinar e avaliar, e na classe Professor, ela herda tanto da classe Estudante quanto da classe Educador.
+```python
+
+class Estudante(ABC):
+    @abstractmethod
+    def estudar(self):
+        pass
+```
+```python
+class Educador(ABC):
+    @abstractmethod
+    def ensinar(self):
+        pass
+    
+    @abstractmethod
+    def avaliar(self):
+        pass
+```
+```python
+
+class Aluno(Estudante):
+    def __init__(self,id: int = 0, nome: str = '', idade: int = 0, curso: str = '' ):
+        #LOgica
+    def estudar(self):
+        print("Estudando!")
+    
+```
+```python
+class Professor(Estudante, Educador):
+    def __init__(self,matricula: int = 0 ,  nome: str = '', idade: int = 0, cargaHoraria: int = 0, salario: float = 0 ):
+        #Logica
+        
+    def estudar(self):
+        print("Estudando conteúdo novo!")
+
+    def ensinar(self):
+        print("Ensinando alunos!")
+
+    def avaliar(self):
+        print("Avaliando aluno!")
+```
