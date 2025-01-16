@@ -258,3 +258,11 @@ class Professor(Estudante, Educador):
     def avaliar(self):
         print("Avaliando aluno!")
 ```
+
+
+
+## Inversão de Dependência
+
+Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender da abstração.
+
+

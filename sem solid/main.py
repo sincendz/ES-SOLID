@@ -3,7 +3,6 @@ import platform
 
 from Aluno import Aluno
 from Professor import Professor
-from Disciplina import Disciplina
 
 alunos = []
 professores = []
@@ -11,13 +10,10 @@ disciplinas = []
 
 aluno = Aluno()
 professor = Professor()
-disciplina = Disciplina()
+
 
 professorLucas = Professor(0,'Lucas',30,100,10_000)
 professorVivi = Professor(1,'Viviane',35,200,20_000)
-
-ES = Disciplina('QXD001',"ES",100,professorLucas,6)
-PAA = Disciplina('QXD002','PAA',100,professorVivi,6)
 
 
 
@@ -25,8 +21,6 @@ PAA = Disciplina('QXD002','PAA',100,professorVivi,6)
 professores.append(professorLucas)
 professores.append(professorVivi)
 
-disciplinas.append(ES)
-disciplinas.append(PAA)
 
 
 def limparTela():
@@ -39,7 +33,6 @@ def limparTela():
 def menu():
     print("1 - Gerenciar Aluno")
     print("2 - Gerenciar Professor")
-    print("3 - Gerenciar Disciplinas")
     print("5 - Sair")
 
 def menuAluno():
@@ -56,13 +49,7 @@ def menuProfessor():
     print("4 - Excluir Professor")
     print("5 - Voltar ao menu Principal")
     
-def menuDisciplina():
-    print("1 - Adicionar Disciplina")
-    print("2 - Editar Disciplina")
-    print("3 - Ver Disciplinas")
-    print("4 - Excluir Disciplina")
-    print("5 - Voltar ao menu Principal")
-    
+
 def escolhasAluno(escolhaAluno):
     if escolhaAluno == 1:
         limparTela()
@@ -113,33 +100,6 @@ def escolhasProfessor(escolhaProfessor):
     return True
 
     
-def escolhasDisciplina(escolhaDisciplina):
-    if escolhaDisciplina == 1:
-        limparTela()
-        disciplina.criarDisciplina(disciplinas,professores)
-    
-    elif escolhaDisciplina == 2:
-        limparTela()
-        codigo = input("Codigo disciplina(QXD---): ")
-        print(codigo)
-        disciplina.editarDisciplina(codigo,disciplinas,professores)
-        
-    elif escolhaDisciplina == 3:
-        limparTela()
-        disciplina.verDisciplinas(disciplinas)
-        
-        
-    elif escolhaDisciplina == 4:
-        limparTela()
-        codigo = input("Codigo disciplina(QXD---): ")
-        disciplina.excluirDisciplina(codigo,disciplinas)
-        
-    
-    elif escolhaDisciplina == 5:
-        return False
-    
-    return True
-    
 
 
 
@@ -158,13 +118,6 @@ while(True):
             menuProfessor()
             escolhaProfessor = int(input("Digite sua escolha: "))
             if not escolhasProfessor(escolhaProfessor):
-                limparTela()
-                break
-    if escolha == 3:
-        while(True):
-            menuDisciplina()
-            escolhaDisciplina = int(input("Digite sua escolha: "))
-            if not escolhasDisciplina(escolhaDisciplina):
                 limparTela()
                 break
     elif escolha == 5:
